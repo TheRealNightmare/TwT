@@ -1,0 +1,7 @@
+{
+  "name": "twitter-news-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
