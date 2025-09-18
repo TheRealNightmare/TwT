@@ -30,6 +30,11 @@ import { createRouter, createWebHistory } from '@ionic/vue-router'
 import HomePage from './views/HomePage.vue'
 
 const routes = [{ path: '/', component: HomePage }]
+import { StatusBar } from "@capacitor/status-bar";
+
+StatusBar.setOverlaysWebView({ overlay: false }); // Pushes app below status bar
+StatusBar.show(); // Make sure it's visible
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,4 +46,7 @@ const app = createApp(App)
 app.use(IonicVue) // ✅ for older Ionic Vue
 app.use(router)
 
-router.isReady().then(() => app.mount('#app'))
+router.isReady().then(() => {
+  app.mount('#app');
+  StatusBar.setOverlaysWebView({ overlay: false });
+});

@@ -1,6 +1,7 @@
 <template>
   <div
-    class="relative bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 h-72 m-2"
+    class="relative bg-gray-100 rounded-lg pb-8 overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 h-72 m-2 cursor-pointer"
+    @click="openLink"
   >
     <!-- Background image -->
     <img
@@ -18,14 +19,6 @@
       <h3 class="text-lg font-bold line-clamp-2 mb-1">{{ article.title }}</h3>
       <p class="text-gray-200 text-sm mb-2">{{ formattedDate }}</p>
       <p class="text-gray-100 text-sm line-clamp-3 mb-3">{{ article.description }}</p>
-
-      <!-- Tailwind button -->
-      <button
-        @click="openLink"
-        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full shadow-md transition-colors duration-300"
-      >
-        Read More
-      </button>
     </div>
   </div>
 </template>

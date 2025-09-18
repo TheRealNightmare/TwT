@@ -3,6 +3,13 @@
     <ion-header>
       <ion-toolbar>
         <ion-title>Latest News</ion-title>
+
+        <!-- Refresh Button -->
+        <ion-buttons slot="end">
+          <ion-button @click="refreshPage" :disabled="loading">
+            Refresh
+          </ion-button>
+        </ion-buttons>
       </ion-toolbar>
     </ion-header>
 
@@ -30,9 +37,10 @@ import NewsCard from '@/components/NewsCard.vue'
 const news = ref<any[]>([])
 const loading = ref(true)
 
-const API_KEY = 'pub_39162992d09540da909796fa6f4ae26c'
+const API_KEY = 'pub_a010e4fa9f8d4234860ee713cbe71e41'
 
 const fetchLatestNews = async () => {
+  loading.value = true
   try {
     const res = await axios.get('https://newsdata.io/api/1/latest', {
       params: {
@@ -46,6 +54,11 @@ const fetchLatestNews = async () => {
   } finally {
     loading.value = false
   }
+}
+
+// Refresh button handler
+const refreshPage = () => {
+  fetchLatestNews()
 }
 
 onMounted(fetchLatestNews)
