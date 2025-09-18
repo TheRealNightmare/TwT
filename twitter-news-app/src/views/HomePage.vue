@@ -1,19 +1,24 @@
 <template>
-  <ion-page>
+  <ion-page class="bg-gray-50">
     <ion-header>
-      <ion-toolbar>
-        <ion-title>Latest News</ion-title>
+      <ion-toolbar class="bg-white shadow">
+        <ion-title class="text-lg font-semibold">Latest News</ion-title>
 
         <!-- Refresh Button -->
         <ion-buttons slot="end">
-          <ion-button @click="refreshPage" :disabled="loading">
+          <ion-button
+            @click="refreshPage"
+            :disabled="loading"
+            class="bg-blue-500 text-white hover:bg-blue-600 px-3 py-1 rounded"
+          >
             Refresh
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding">
+    <!-- Fullscreen ion-content -->
+    <ion-content fullscreen class="ion-padding pb-32">
       <div v-if="loading" class="text-center text-gray-500 mt-10">
         Loading latest news...
       </div>
@@ -43,12 +48,10 @@ const fetchLatestNews = async () => {
   loading.value = true
   try {
     const res = await axios.get('https://newsdata.io/api/1/latest', {
-      params: {
-        apikey: API_KEY,
-        language: 'en',
-      },
+      params: { apikey: API_KEY, language: 'en' },
     })
-    news.value = res.data.results || []
+    // Limit to 7 latest news
+    news.value = (res.data.results || [])
   } catch (err) {
     console.error('Error fetching news:', err)
   } finally {
