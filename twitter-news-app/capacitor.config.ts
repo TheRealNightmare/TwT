@@ -1,15 +1,11 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'TWT',
-  webDir: 'dist',
-  plugins: {
-    StatusBar: {
-      overlaysWebView: false,
-      style: "DARK",
-      backgroundColor: "#ffffffff",
-    },
+  appId: "io.ionic.starter",
+  appName: "TwT",
+  webDir: "dist",
+  server: {
+    androidScheme: "https",
   },
 };
 
