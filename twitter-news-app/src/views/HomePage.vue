@@ -4,6 +4,12 @@
       <ion-toolbar>
         <ion-title>TWT</ion-title>
         <ion-buttons slot="end">
+          <!-- Refresh Button -->
+          <ion-button @click="refreshPage" fill="clear" :disabled="loading">
+            <ion-icon :icon="refreshOutline" slot="icon-only"></ion-icon>
+          </ion-button>
+
+          <!-- Logout Button -->
           <ion-button @click="handleLogout" fill="clear" :disabled="isLoading">
             <ion-spinner v-if="isLoading" name="crescent"></ion-spinner>
           </ion-button>
@@ -50,9 +56,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from "vue";
-import { useRouter } from "vue-router";
+import { ref, onMounted } from "vue";
 import axios from "axios";
+import { refreshOutline } from "ionicons/icons";
+import { IonIcon } from "@ionic/vue";
 import {
   IonPage,
   IonHeader,
@@ -64,19 +71,17 @@ import {
   IonButton,
   IonButtons,
   IonSpinner,
-  alertController,
   IonImg,
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
   IonText,
 } from "@ionic/vue";
-const router = useRouter();
 
 // News API setup
 const news = ref<any[]>([]);
 const loading = ref(true);
-const API_KEY = "pub_a010e4fa9f8d4234860ee713cbe71e41";
+const API_KEY = "pub_39162992d09540da909796fa6f4ae26c";
 
 // Fetch latest news
 const fetchLatestNews = async () => {
@@ -85,7 +90,7 @@ const fetchLatestNews = async () => {
     const res = await axios.get("https://newsdata.io/api/1/latest", {
       params: { apikey: API_KEY, language: "en" },
     });
-    news.value = (res.data.results || []).slice(0, 5); // Fetch the latest 5 news
+    news.value = (res.data.results || []).slice(0, 10); // Fetch the latest 5 news
   } catch (err) {
     console.error("Error fetching news:", err);
   } finally {
