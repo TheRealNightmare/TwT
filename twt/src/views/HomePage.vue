@@ -81,7 +81,7 @@ import {
 // News API setup
 const news = ref<any[]>([]);
 const loading = ref(true);
-const API_KEY = "pub_39162992d09540da909796fa6f4ae26c";
+const API_KEY = "news data api code";
 
 // Fetch latest news
 const fetchLatestNews = async () => {
